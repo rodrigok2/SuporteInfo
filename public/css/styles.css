@@ -1,0 +1,266 @@
+body, html{
+    height: 100%;
+}
+
+.nav-header{
+    border-top: 1px solid rgb(125, 125, 128);
+}
+
+.has-treeview{
+    border-top: 1px solid rgb(125, 125, 128);
+}
+
+.form-control-sidebar{
+    margin: 5px;
+}
+
+.border {
+    border: 1px #b7c1d1;
+    padding: 10px;
+    border-radius: 10px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.input-filter, .label-filter, .button-filter{
+    margin: 5px 0px 0px 0px;
+}
+
+.row-left-customized {
+    max-width: 100%;
+    margin: 0px auto;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+}
+
+.form-control-sidebar{
+    margin: 0px;
+}
+
+.brand-link {
+    text-decoration:none;
+}
+
+/*
+CSS para as mensagens de alerta
+*/
+.msg-alertas{
+
+    width:100%;
+    overflow:hidden;
+    margin:0 auto;
+    padding:10px;
+}
+
+.ms{
+
+   width:100%;
+   margin:auto;
+   padding:1em;
+   float:left;
+   display:block;
+   margin-bottom:10px;
+   font-family:Verdana, Arial, Helvetica, sans-serif;
+   font-weight:100;
+   font-size:16px;
+}
+
+.erro   { background-color:#FFCACA; border:2px #a60202 solid; color:#a60202; border-radius:5px; }
+.ok     { background-color:#A6FFBC; border:2px #00bd00 solid; color:#00bd00; border-radius:5px; }
+.alerta { background-color:#FFFFBF; border:2px #2b2b2b solid; color:#2b2b2b; border-radius:5px; }
+.info   { background-color:#B3E7FF; border:2px #018ace solid; color:#018ace; border-radius:5px; }
+
+/*
+CSS Dashboard Leo
+*/
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+a[x-apple-data-detectors] {
+    color: inherit !important;
+    text-decoration: inherit !important;
+}
+
+#MessageViewBody a {
+    color: inherit;
+    text-decoration: none;
+}
+
+p {
+    line-height: inherit
+}
+
+.desktop_hide,
+.desktop_hide table {
+    mso-hide: all;
+    display: none;
+    max-height: 0px;
+    overflow: hidden;
+}
+
+.card-hover-shadow:hover {
+    box-shadow: 0 6px 12px rgba(140, 152, 164, .25) !important
+}
+.h-100 {
+    height: 100% !important
+}
+
+.card {
+    box-shadow: 0 6px 12px rgba(140, 152, 164, .075)
+}
+
+.card-sm > .card-body, .card-sm > .collapse .card-body {
+    padding: 1rem 1rem
+}
+
+.card-lg > .card-body, .card-lg > .collapse .card-body {
+    padding: 2rem 2rem
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem
+}
+.card-body-height {
+    height: 21.25rem;
+    overflow: hidden;
+    overflow-y: auto
+}
+
+.card-body-height::-webkit-scrollbar {
+    width: .6125rem
+}
+
+.card-body-height::-webkit-scrollbar-thumb {
+    background-color: rgba(189, 197, 209, .6)
+}
+
+.card-body-centered {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-direction: column;
+    flex-direction: column
+}
+
+.card-body-stretched {
+    padding: 0 1rem 1rem 1rem
+}
+
+@media (max-width:670px) {
+    .desktop_hide table.icons-inner {
+        display: inline-block !important;
+    }
+
+    .icons-inner {
+        text-align: center;
+    }
+
+    .icons-inner td {
+        margin: 0 auto;
+    }
+
+    .image_block img.big,
+    .row-content {
+        width: 100% !important;
+    }
+
+    .mobile_hide {
+        display: none;
+    }
+
+    .stack .column {
+        width: 100%;
+        display: block;
+    }
+
+    .mobile_hide {
+        min-height: 0;
+        max-height: 0;
+        max-width: 0;
+        overflow: hidden;
+        font-size: 0px;
+    }
+
+    .desktop_hide,
+    .desktop_hide table {
+        display: table !important;
+        max-height: none !important;
+    }
+
+    .card-hover-shadow {
+        transition: .3s
+    }
+}
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+
+.card-button {
+position: relative;
+min-width: 160px;
+height: 100px;
+overflow: hidden;
+border-radius: 8px;
+margin: 0 auto;
+padding: 0px 13px 0px 13px;
+box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+transition: .5s;
+margin-bottom: 15px;
+
+}
+.card-button:hover {
+transform:scale(1.05);
+}
+
+.card_blue{
+    background: #2185c5;
+}
+.card_green{
+    background-color: #21c52f;
+}
+
+.card_red {
+    background: #c52121;
+}
+
+.remover-sublinhado {
+    text-decoration:none;
+}
+
+.title {
+    justify-content: space-between;
+    display: flex;
+}
+
+.valor .fa {
+color: #fff;
+font-size: 20px;
+}
+
+.title h2 {
+color: #fff;
+font-size: 20px;
+}
+
+.valor {
+    display: flex;
+    justify-content: space-between
+}
+
+.valor h4 {
+color: #fff;
+font-size: 35px;
+}
