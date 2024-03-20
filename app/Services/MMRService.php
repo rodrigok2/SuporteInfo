@@ -12,12 +12,9 @@ use Illuminate\Support\Facades\Log;
 
 class MMRService
 {
-    public function calcularMmr(){
-        $primeiroDiaMesAtual = date('Y-m-01');
-        $today = date("Y-m-d");
-
-        $data_inicial = $primeiroDiaMesAtual." 00:00:00";
-        $data_final = $today." 23:59:59";
+    public function calcularMmr($tecnicos, $data_inicial, $data_final){
+        $data_inicial = $data_inicial." 00:00:00";
+        $data_final = $data_final." 23:59:59";
 
         $osRepository = new SisOsRepository();
         $list = $osRepository->OsFechadasPorPeriodo($data_inicial, $data_final);
@@ -34,34 +31,14 @@ class MMRService
                     $list[$i]['nivel_servico'] = $servico[0]['nivel_servico'];
                 }
                 elseif($servico[0]['nivel_servico'] === 2){
-                    $list[$i]['nivel_servico'] = 2.50;
+                    $list[$i]['nivel_servico'] = 3.13;
                 }
                 elseif($servico[0]['nivel_servico'] === 3){
-                    $list[$i]['nivel_servico'] = 5;
+                    $list[$i]['nivel_servico'] = 8.25;
                 }
                 $list[$i]['tempo_medio'] = $servico[0]['tempo_medio'];
             }
         }
-
-        $tecnicos = array();
-        $tecnicos[0]['tecnico_id'] = 126;
-        $tecnicos[0]['username'] = 'filipe.augusto';
-        $tecnicos[1]['tecnico_id'] = 127;
-        $tecnicos[1]['username'] = 'isadora.viegas';
-        $tecnicos[2]['tecnico_id'] = 119;
-        $tecnicos[2]['username'] = 'leticia.oliveira';
-        $tecnicos[3]['tecnico_id'] = 114;
-        $tecnicos[3]['username'] = 'layanne.fernandes';
-        $tecnicos[4]['tecnico_id'] = 118;
-        $tecnicos[4]['username'] = 'bruna.ferreira';
-        $tecnicos[5]['tecnico_id'] = 132;
-        $tecnicos[5]['username'] = 'miguel.felipe';
-        $tecnicos[6]['tecnico_id'] = 131;
-        $tecnicos[6]['username'] = 'kayo.heytor';
-        $tecnicos[7]['tecnico_id'] = 121;
-        $tecnicos[7]['username'] = 'yasmim.rodrigues';
-
-        //dd($list[100]);
 
         for( $i = 0; $i < count($tecnicos); $i++ ){
             $tecnicos[$i]['mmr'] = 0;
@@ -87,9 +64,6 @@ class MMRService
                 }
             }
         }
-
-        dd($tecnicos);
-        //pegar tecnicos que vao participar do calculo
-        //pegar tempo medio e nivel do servico
+        return ($tecnicos);
     }
 }

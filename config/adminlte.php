@@ -305,6 +305,11 @@ return [
             'icon'    => 'fa-solid fa-phone-volume',
             'submenu' => [
                 [
+                    'text' => 'Rank de produtividade',
+                    'url'  => 'admin/produtividade',
+                    'icon' => 'fa-solid fa-chart-area',
+                ],
+                [
                     'text' => 'Ordens de serviços',
                     'url'  => 'admin/os',
                     'icon' => 'fas fa-clipboard-list',

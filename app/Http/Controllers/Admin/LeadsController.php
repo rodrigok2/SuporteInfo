@@ -79,8 +79,6 @@ class LeadsController extends Controller
     }
 
     function detalhes(Request $request){
-        $teste = new \App\Services\MMRService;
-        $teste2 = $teste->calcularMmr();
         return view ('admin.leads.detalhes');
     }
 }

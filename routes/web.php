@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AndamentoController;
 use App\Http\Controllers\Admin\LogBackupController;
 use App\Http\Controllers\Admin\LeadsController;
+use App\Http\Controllers\Admin\ProdutividadeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,15 @@ Route::middleware(['auth'])
     ->name('admin.dashboard.')
     ->group(function(){
         Route::get('/', [DashboardController::class, 'index'])->name('index');
-        Route::get('/painel', [DashboardController::class, 'painel'])->name('painel');
+    }
+);
+
+Route::middleware(['auth'])
+    ->prefix('admin/produtividade')
+    ->name('admin.produtividade.')
+    ->group(function(){
+        Route::get('/', [ProdutividadeController::class, 'index'])->name('index');
+        Route::get('/teste', [ProdutividadeController::class, 'teste'])->name('teste');
     }
 );
 

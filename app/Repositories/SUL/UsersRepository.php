@@ -95,6 +95,33 @@ class UsersRepository{
             Log::critical('UsersRepository->UsernamePorId', [$e]);
             return false;
         }
+    }
+
+    function UsuariosProfileSuporte(){
+        try{
+            //Pesquisa os dados do técnico
+            $tecnicos = DB::connection('mysql_sul')->table("users")
+            ->select(
+                "users.id as tecnico_id",
+                "users.username as username"
+                )
+            ->join('users_profiles', 'users.id', '=', 'users_profiles.user')
+            ->where("users.active", "=", 1)
+            ->where("users_profiles.profile", "=", 3)
+            ->where("users.id", "<>", 2)
+            ->where("users.id", "<>", 79)
+            ->where("users.id", "<>", 102)
+            ->where("users.id", "<>", 14)
+            ->orderBy("tecnico_id", "asc")
+            ->get();
+
+            $tecnicos = json_decode(json_encode($tecnicos), true);
+
+            return $tecnicos;
+        }catch(Exception $e){
+            Log::critical('UsersRepository->UsuariosProfileSuporte', [$e]);
+            return false;
+        }
 
     }
 }

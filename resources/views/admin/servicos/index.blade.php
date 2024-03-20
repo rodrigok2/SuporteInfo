@@ -75,19 +75,21 @@
         </div>
     </div>
     {{--GRAFICOS DE BARRAS--}}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card" style="overflow-x: auto;">
-                    <div class="card-body">
-                        <div class="col-sm-12">
-                            <div id="columnchart_values" style="display: flex; align-items: center; justify-content: center; width: 1000px; height: 500px;"></div>
+    @if($lista_de_servicos != null)
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card" style="overflow-x: auto;">
+                        <div class="card-body">
+                            <div class="col-sm-12">
+                                <div id="columnchart_values" style="display: flex; align-items: center; justify-content: center; width: 1000px; height: 500px;"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
     {{--TABELA--}}
     @if($lista_de_servicos != null)
         <div class="container-fluid">
