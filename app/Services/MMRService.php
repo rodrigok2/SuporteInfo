@@ -43,6 +43,9 @@ class MMRService
         for( $i = 0; $i < count($tecnicos); $i++ ){
             $tecnicos[$i]['mmr'] = 0;
             $tecnicos[$i]['qtde_os'] = 0;
+            $tecnicos[$i]['total_n1'] = 0;
+            $tecnicos[$i]['total_n2'] = 0;
+            $tecnicos[$i]['total_n3'] = 0;
             //dd($tecnicos[$i]['tecnico_id']);
             for( $j = 0; $j < count($list); $j++ ){
                 if($tecnicos[$i]['tecnico_id'] === $list[$j]['tecnico_id']){
@@ -61,6 +64,15 @@ class MMRService
                     }
                     $tecnicos[$i]['mmr'] += $nivel;
                     $tecnicos[$i]['qtde_os'] += 1;
+                    if($nivel < 2){
+                        $tecnicos[$i]['total_n1']++;
+                    }
+                    elseif($nivel < 5){
+                        $tecnicos[$i]['total_n2']++;
+                    }
+                    elseif($nivel < 12){
+                        $tecnicos[$i]['total_n3']++;
+                    }
                 }
             }
         }

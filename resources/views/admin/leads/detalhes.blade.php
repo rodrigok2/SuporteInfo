@@ -4,44 +4,47 @@
 
 @section('content_header')
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-12">
+                <h1 class="m-0">
+                    <div class="row">
+                        <div style="padding-left: 10px;">
+                            Leads
+                        </div>
+                        <div style="font-size: 14px; vertical-align: middle; padding-left 10px; padding-top: 10px;">
+                            <i class="fa fa-info-circle"></i>
+                            Utilize para vizualizar os leads de determinada classificação.
+                        </div>
+                    </div>
+                </h1>
+            </div>
+        </div>
+    </div>
 @stop
 
 @section('content')
-    <section class="section">
-        <div class="row">
-            <br><br>
-            <table class="table table-bordered">
-                <tbody>
-                    <tr>
-                        <th scope="row">Grupo</th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Subgrupo</th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Servico</th>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-            <table class="table table-bordered table-striped table-responsive-stack"  id="tableOne" style="width:100%">
-                <thead class="thead-dark">
-                    <tr>
-                        <th style="width:10%">O.S.</th>
-                        <th style="width:25%">Classificacao</th>
-                        <th style="width:40%">Descricao</th>
-                        <th style="width:10%">Técnico</th>
-                        <th style="width:15%"></th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" style="overflow-x: auto;">
+                <div class="card-body">
+                    <div class="col-sm-12">
+                        Em construção...
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
+</div>
+@stop
+
+@section('footer')
+    <strong>Desenvolvido por Rodrigo Martins</strong>
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Versão</b>
+         0.01
+    </div>
 @stop
 
 @section('css')

@@ -14,7 +14,7 @@
                         </div>
                         <div style="font-size: 14px; vertical-align: middle; padding-left 10px; padding-top: 10px;">
                             <i class="fa fa-info-circle"></i>
-                             Pagina utilizada para comparar a produtividade da equipe de suporte técnico.
+                                Pagina utilizada para comparar a produtividade da equipe de suporte técnico.
                         </div>
                     </div>
                 </h1>
@@ -76,9 +76,22 @@
     </div>
     {{--TABELA--}}
     @if($tecnicos != null)
+        @php
+            $usuarioTemOsConcluida = 'false';
+            for($i=0; $i < count($tecnicos); $i++){
+                if($username == $tecnicos[$i]['username'])
+                {
+                    $usuarioTemOsConcluida = 'true';
+                }
+            }
+        @endphp
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-4">
+                    @if($usuarioTemOsConcluida)
+                        {{--GRAFICOS DE BARRAS--}}
+                        <div id="columnchart_values" style="display: flex; align-items: center; justify-content: center; width: 350px; height: 500px;"></div>
+                    @endif
                 </div>
                 <div class="col-md-4">
                     <div class="card" style="overflow-x: auto;">
@@ -144,6 +157,63 @@
         });
     </script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    @if($tecnicos != null)
+        @if($usuarioTemOsConcluida)
+            @php
+                $nivel1 = 'Nível 1';
+                $nivel2 = 'Nível 2';
+                $nivel3 = 'Nível 3';
+            @endphp
+            <script type="text/javascript">
+                google.charts.load("current", {packages:['corechart']});
+                google.charts.setOnLoadCallback(drawChart);
+                function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                        ["Nivel", "Quantidade", { role: "style" } ],
+                        <?php
+                            for($i=0; $i < count($tecnicos); $i++){
+                                if($username == $tecnicos[$i]['username'])
+                                {
+                                    $qtde1 = intVal($tecnicos[$i]["total_n1"]);
+                                    $qtde2 = intVal($tecnicos[$i]["total_n2"]);
+                                    $qtde3 = intVal($tecnicos[$i]["total_n3"]);
+                                    $rand = str_pad(dechex(rand(0x000000, 0xFFFFFF)), 6, 0, STR_PAD_LEFT);
+                                    $r1 = '#'.$rand;
+                                    $rand = str_pad(dechex(rand(0x000000, 0xFFFFFF)), 6, 0, STR_PAD_LEFT);
+                                    $r2 = '#'.$rand;
+                                    $rand = str_pad(dechex(rand(0x000000, 0xFFFFFF)), 6, 0, STR_PAD_LEFT);
+                                    $r3 = '#'.$rand;
+                                }
+                        ?>
+                        ["<?php echo $nivel1 ?>", <?php echo $qtde1 ?>, "<?php echo $r1 ?>"],
+                        ["<?php echo $nivel2 ?>", <?php echo $qtde2 ?>, "<?php echo $r2 ?>"],
+                        ["<?php echo $nivel3 ?>", <?php echo $qtde3 ?>, "<?php echo $r3 ?>"],
+                        <?php
+                            }
+                        ?>
+                    ]);
+
+                    var view = new google.visualization.DataView(data);
+                    view.setColumns([0, 1, {
+                        calc: "stringify",
+                        sourceColumn: 1,
+                        type: "string",
+                        role: "annotation" },
+                    2]);
+
+                    var options = {
+                        title: "Quantidade de O.S. fechada por nível de complexidade",
+                        width: 350,
+                        height: 500,
+                        bar: {groupWidth: "95%"},
+                        legend: { position: "none" },
+                    };
+                    var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+                    chart.draw(view, options);
+                }
+            </script>
+        @endif
+    @endif
 @stop
 
 

@@ -24,24 +24,27 @@
                                     "tecnico_id" => $user->id,
                                     "filtro_ativo"=> 1,
                                 ]) }}">
-                                <div style="">
-                                    <div class="card-button card_blue text-left">
-                                        <div class="title">
-                                            <h2>Total de andamentos</h2>
+                                <div  style="">
+                                    <div class="small-box bg-blue" style="height: 100px;">
+                                        <div class="inner">
+                                            <div class="title">
+                                                <h2>Total de andamentos</h2>
+                                            </div>
+                                            <div class="valor">
+                                                @if($total_andamento[0]->total == null)
+                                                    <h6 style="color:#ffffff" id="emprestimos1">0 minutos</h6>
+                                                @else
+                                                    @php
+                                                        $horas = intdiv($total_andamento[0]->total, 60);
+                                                        $minutos = $total_andamento[0]->total % 60;
+                                                        $texto = "Total: ".$horas." hora(s) e ".$minutos." minuto(s)";
+                                                    @endphp
+                                                        <h6 style="color:#ffffff" id="emprestimos1">{{ $texto }}</h6>
+                                                @endif
+                                            </div>
                                         </div>
-                                        <div class="valor">
-                                            @if($total_andamento[0]->total == null)
-                                                <h6 style="color:#ffffff" id="emprestimos1">0 minutos</h6>
-                                                <i class="fa fa-phone" aria-hidden="true"></i>
-                                            @else
-                                                @php
-                                                    $horas = intdiv($total_andamento[0]->total, 60);
-                                                    $minutos = $total_andamento[0]->total % 60;
-                                                    $texto = "Total: ".$horas." hora(s) e ".$minutos." minuto(s)";
-                                                @endphp
-                                                    <h6 style="color:#ffffff" id="emprestimos1">{{ $texto }}</h6>
-                                                    <i class="fa fa-phone" aria-hidden="true"></i>
-                                            @endif
+                                        <div class="icon">
+                                            <i class="fa fa-volume-control-phone"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -56,18 +59,21 @@
                                     "filtro_ativo"=> 1,
                                 ]) }}">
                                 <div  style="">
-                                    <div class="card-button card_green text-center">
-                                        <div class="title">
-                                            <h2>O.S. finalizadas</h2>
+                                    <div class="small-box bg-green" style="height: 100px;">
+                                        <div class="inner">
+                                            <div class="title">
+                                                <h2>O.S. finalizadas</h2>
+                                            </div>
+                                            <div class="valor">
+                                                @if($total_os_fechadas[0]->total == null)
+                                                    <h5 style="color:#ffffff" id="emprestimos1">0</h5>
+                                                @else
+                                                    <h5 style="color:#ffffff" id="emprestimos1">{{ $total_os_fechadas[0]->total }}</h5>
+                                                @endif
+                                            </div>
                                         </div>
-                                        <div class="valor">
-                                            @if($total_os_fechadas[0]->total == null)
-                                                <h5 style="color:#ffffff" id="emprestimos1">0</h5>
-                                                <i class="fa fa-check" aria-hidden="true"></i>
-                                            @else
-                                                <h5 style="color:#ffffff" id="emprestimos1">{{ $total_os_fechadas[0]->total }}</h5>
-                                                <i class="fa fa-check" aria-hidden="true"></i>
-                                            @endif
+                                        <div class="icon">
+                                            <i class="fa fa-check-square-o"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -80,18 +86,21 @@
                                     "filtro_ativo"=> 1,
                                 ]) }}">
                                 <div  style="">
-                                    <div class="card-button card_red text-center">
-                                        <div class="title">
-                                            <h2>O.S. abertas</h2>
+                                    <div class="small-box bg-red" style="height: 100px;">
+                                        <div class="inner">
+                                            <div class="title">
+                                                <h2>O.S. abertas</h2>
+                                            </div>
+                                            <div class="valor">
+                                                @if($total_os_abertas[0]->total == null)
+                                                    <h5 style="color:#ffffff" id="emprestimos1">0</h5>
+                                                @else
+                                                    <h5 style="color:#ffffff" id="emprestimos1">{{ $total_os_abertas[0]->total }}</h5>
+                                                @endif
+                                            </div>
                                         </div>
-                                        <div class="valor">
-                                            @if($total_os_abertas[0]->total == null)
-                                                <h5 style="color:#ffffff" id="emprestimos1">0</h5>
-                                                <i class="fa fa-file" aria-hidden="true"></i>
-                                            @else
-                                                <h5 style="color:#ffffff" id="emprestimos1">{{ $total_os_abertas[0]->total }}</h5>
-                                                <i class="fa fa-file" aria-hidden="true"></i>
-                                            @endif
+                                        <div class="icon">
+                                            <i class="fa fa-exclamation-triangle"></i>
                                         </div>
                                     </div>
                                 </div>

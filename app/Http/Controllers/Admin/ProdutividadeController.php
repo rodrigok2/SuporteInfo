@@ -48,6 +48,8 @@ class ProdutividadeController extends Controller
 
     function teste(Request $request){
         $user = Auth::user();
+        $user_id = $user->id;
+        $username = $user->username;
 
         if($request->filtro_ativo == 1){
             $data_inicial = new DateTime($request->data_inicial);
@@ -57,6 +59,8 @@ class ProdutividadeController extends Controller
             if($dateInterval->days > 31 || ($data_inicial > $data_final)){
                 return redirect('admin/produtividade/teste')
                     ->with("tecnicos", null)
+                    ->with('user_id', null)
+                    ->with('username', null)
                     ->with("erro","As datas selecionadas são inválidas!");
             }
             else{
@@ -65,6 +69,8 @@ class ProdutividadeController extends Controller
                 if(!$tecnicos){
                     return redirect('admin/produtividade/teste')
                         ->with("tecnicos", null)
+                        ->with('user_id', null)
+                        ->with('username', null)
                         ->with("erro","Falha ao carregar lista de usuários do setor suporte no SUL!");
                 }
                 else{
@@ -73,11 +79,14 @@ class ProdutividadeController extends Controller
 
                     //ordenar por MMR
                     array_multisort(array_column($tecnicos, 'mmr'), SORT_DESC, $tecnicos);
-
-                    return view ('admin.produtividade.teste', compact('tecnicos'));
+                    //dd($tecnicos);
+                    return view ('admin.produtividade.teste', compact('tecnicos', 'user_id', 'username'));
                 }
             }
         }
-        return view ('admin.produtividade.teste')->with('tecnicos', null);
+        return view ('admin.produtividade.teste')
+            ->with('tecnicos', null)
+            ->with('username', null)
+            ->with('user_id', null);
     }
 }
