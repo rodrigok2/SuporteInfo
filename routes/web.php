@@ -53,6 +53,7 @@ Route::middleware(['auth'])
     ->group(function(){
         Route::get('/', [LeadsController::class, 'index'])->name('index');
         Route::get('/detalhes', [LeadsController::class, 'detalhes'])->name('detalhes');
+        Route::get('/conversao', [LeadsController::class, 'conversao'])->name('conversao');
     }
 );
 

@@ -33,7 +33,7 @@ class LeadsController extends Controller
         }
 
         if($request->filtro_ativo == 1){
-            if($data_inicial == null || $data_final == null){
+            if($data_inicial == null || $data_final == null || $data_inicial > $data_final){
                 return redirect('admin/leads')
                     ->with("leads", null)
                     ->with("sistemas", null)
@@ -80,5 +80,76 @@ class LeadsController extends Controller
 
     function detalhes(Request $request){
         return view ('admin.leads.detalhes');
+    }
+
+    function conversao(Request $request){
+        $data_inicial = $request->data_inicial;
+        $data_final = $request->data_final;
+        $leadsConvertidos = 0;
+        $leadsNaoConvertidos = 0;
+        $leads = null;
+
+        $sisSistemasRepository = new SisSistemasRepository();
+        $sistemas = $sisSistemasRepository->PesquisarSistemas();
+
+        if(!$sistemas){
+            Log::warning('Falha ao carregar lista de sistemas no SUL');
+            return redirect("admin/leads/conversao")
+                ->with("leads", null)
+                ->with("sistemas", null)
+                ->with("leadsConvertidos", $leadsConvertidos)
+                ->with("leadsNaoConvertidos", $leadsNaoConvertidos)
+                ->with('data_inicial', $data_inicial)
+                ->with('data_final', $data_final)
+                ->with("erro","Falha ao carregar lista de sistemas no SUL!");
+        }
+
+        if($request->filtro_ativo == 1){
+            if($data_inicial == null || $request->data_final == null || $data_inicial > $data_final){
+                return redirect("admin/leads/conversao")
+                    ->with("leads", null)
+                    ->with("sistemas", $sistemas)
+                    ->with("leadsConvertidos", $leadsConvertidos)
+                    ->with("leadsNaoConvertidos", $leadsNaoConvertidos)
+                    ->with('data_inicial', $data_inicial)
+                    ->with('data_final', $data_final)
+                    ->with("erro", "As datas selecionadas são inválidas!");
+            }
+
+            $leadsRepository = new LeadsRepository();
+            $leads = $leadsRepository->LeadsFinalizados($request->data_inicial,$request->data_final, $request->sistema_id);
+
+            if(!$leads){
+                Log::warning('Falha ao carregar leads no SUL');
+                return redirect("admin/leads/conversao")
+                ->with("leads", null)
+                ->with("sistemas", $sistemas)
+                ->with("leadsConvertidos", $leadsConvertidos)
+                ->with("leadsNaoConvertidos", $leadsNaoConvertidos)
+                ->with('data_inicial', $data_inicial)
+                ->with('data_final', $data_final)
+                ->with("erro","Falha ao carregar leads no SUL!");
+            }
+            else{
+                $leadsConvertidos = 0;
+                $leadsNaoConvertidos = 0;
+
+                for($i=0; $i < count($leads); $i++){
+                    if($leads[$i]['status_id'] == 4){
+                        $leadsConvertidos++;
+                    }
+                    else{
+                        $leadsNaoConvertidos ++;
+                    }
+                }
+            }
+        }
+        return view("admin.leads.conversao")
+            ->with("leads", $leads)
+            ->with("sistemas", $sistemas)
+            ->with("leadsConvertidos", $leadsConvertidos)
+            ->with("leadsNaoConvertidos", $leadsNaoConvertidos)
+            ->with('data_inicial', $data_inicial)
+            ->with('data_final', $data_final);
     }
 }

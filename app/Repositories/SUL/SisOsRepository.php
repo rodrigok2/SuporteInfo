@@ -446,4 +446,36 @@ class SisOsRepository{
             return false;
         }
     }
+
+    function rankServicosMaisUtilizados($data_inicial, $data_final, $nivel3){
+        try{
+            //Busca no SUl os andamentos vinculados ao servico e o periodo selecionado
+            $list = DB::connection('mysql_sul')->table("sis_os")
+                ->select(
+                    "sis_os.ultimo_servico as servico_id",
+                    "servicos.descricao as servico_descricao",
+                    DB::raw('count(sis_os.ultimo_servico) as total')
+                    )
+                ->join('servicos', 'sis_os.ultimo_servico', '=', 'servicos.id')
+                ->where("sis_os.status", "=", 0)
+                ->where("sis_os.data_fim", ">=", $data_inicial)
+                ->where("sis_os.data_fim", "<=", $data_final);
+
+            if($nivel3){
+                $list->where("servicos.nivel", "=", 3);
+            }
+
+            $list->groupBy("sis_os.ultimo_servico");
+            $list->orderBy("total", "desc");
+            $list = $list->get();
+
+            $list = json_decode(json_encode($list), true);
+            dd($list);
+            return $list;
+
+        }catch(Exception $e){
+            Log::critical('SisOsRepository->rankServicosMaisUtilizados', [$e]);
+            return false;
+        }
+    }
 }

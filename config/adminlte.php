@@ -310,14 +310,14 @@ return [
                     'icon' => 'fa-solid fa-chart-area',
                 ],
                 [
-                    'text' => 'Ordens de serviços',
-                    'url'  => 'admin/os',
-                    'icon' => 'fas fa-clipboard-list',
-                ],
-                [
                     'text' => 'Rank de serviços',
                     'url'  => 'admin/servicos',
                     'icon' => 'fa-solid fa-ranking-star',
+                ],
+                [
+                    'text' => 'Ordens de serviços',
+                    'url'  => 'admin/os',
+                    'icon' => 'fas fa-clipboard-list',
                 ],
                 [
                     'text' => 'Andamentos',
@@ -337,8 +337,19 @@ return [
             'submenu' => [
                 [
                     'text' => 'Leads',
-                    'url'  => 'admin/leads',
                     'icon' => 'fa-solid fa-filter-circle-dollar',
+                    'submenu' => [
+                        [
+                            'text' => 'Origem dos leads',
+                            'url'  => 'admin/leads',
+                            'icon' => 'fa-solid fa-phone-volume',
+                        ],
+                        [
+                            'text' => 'Taxa de conversão',
+                            'url'  => 'admin/leads/conversao',
+                            'icon' => 'fa-solid fa-percent',
+                        ],
+                    ]
                 ],
             ],
         ],

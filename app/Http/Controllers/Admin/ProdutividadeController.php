@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use DateTime;
 use App\Repositories\SUL\UsersRepository;
 use App\Services\MMRService;
+use App\Repositories\SUL\SisOsRepository;
 
 class ProdutividadeController extends Controller
 {
@@ -38,6 +39,9 @@ class ProdutividadeController extends Controller
 
                     //ordenar por MMR
                     array_multisort(array_column($tecnicos, 'mmr'), SORT_DESC, $tecnicos);
+
+                    //$sisOsRepository = new SisOsRepository();
+                    //$rankServisos = $sisOsRepository->rankServicosMaisUtilizados($request->data_inicial, $request->data_final, false);
 
                     return view ('admin.produtividade.index', compact('tecnicos'));
                 }
